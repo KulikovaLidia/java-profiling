@@ -12,14 +12,13 @@ public class HistoryController {
         throw new UnsupportedOperationException();
     }
 
-    public Collection<String> getHistory(File file) {
-        BufferedReader reader = null;
+    public Collection<String> getHistory(File file, String encoding) {
         try{
-            reader = new BufferedReader(
-                    new InputStreamReader(
-                            new BufferedInputStream(
-                                    new FileInputStream(file)),
-                            "windows-1251"));
+            FileInputStream fileInputStream = new FileInputStream(file);
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
+            InputStreamReader inputStreamReader = new InputStreamReader(bufferedInputStream, encoding);
+            BufferedReader reader = new BufferedReader(inputStreamReader);
+            return reader.lines().collect(Collectors.toList());
         }
         catch (FileNotFoundException e) {
             System.out.println("Unable to get history!");
@@ -28,8 +27,7 @@ public class HistoryController {
             System.out.println("Incorrect enconding");
 
         }
-
-        return reader.lines().collect(Collectors.toList());
+        return null;
     }
 
 }

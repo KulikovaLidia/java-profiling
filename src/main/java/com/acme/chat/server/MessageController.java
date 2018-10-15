@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * DDD, Eric Evance
@@ -27,8 +28,8 @@ public class MessageController {
         historyController.update(message);
     }
 
-    public List<String> getHistory(File file) {
-        return historyController.getHistory(file).stream().collect(Collectors.toList());
+    public List<String> getHistory(File file, String encoding) {
+        return historyController.getHistory(file, encoding).stream().collect(Collectors.toList());
     }
 
     public void subscribeOn(ChatClient client) {
